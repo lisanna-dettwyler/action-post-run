@@ -21,4 +21,5 @@ jobs:
         run: false
       - uses: ./success
         with:
-          run: echo "this only runs if the job succeeded (post-if: \'success()\'"
+          run: |
+            echo "this only runs if the job succeeded (post-if: 'success()'"
