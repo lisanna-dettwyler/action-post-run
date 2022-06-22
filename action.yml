@@ -11,7 +11,12 @@ inputs:
     description: "A working directory from which the command needs to be run."
     required: false
 
+  post-if:
+    description: Expression to determine whether the post step runs.
+    default: 'always()'
+
 runs:
   using: node16
   main: dist/main/index.js
   post: dist/post/index.js
+  post-if: '${{ inputs.post-if }}'
