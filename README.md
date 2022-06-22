@@ -9,42 +9,66 @@ A simple GitHub action that enables running post-run steps, once a workflow job 
 **Required** A command that needs to be run. Default `echo "This is a post-run step..."`.
 
 ## Example usage
-Latest version: `2.0.1`
+Latest version: `3.1.0`
 
 ```yaml
 name: Build
-
 on:
   push:
     branches: [ master ]
-
-env:
-  GH_TOKEN: ${{ secrets.GH_TOKEN }}
-
 jobs:
   something:
     name: Do something...
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-    
-      - uses: webiny/action-post-run@2.0.1
-        id: post-run-command
+      - uses: lisanna-dettwyler/action-post-run@3.1.0
         with:
           run: echo "this thing works!"
-
-      - uses: webiny/action-post-run@2.0.1
-        id: another-post-run-command
+      - uses: lisanna-dettwyler/action-post-run@3.1.0
         with:
-          run: echo "this thing works again!"
-          working-directory: not-required-but-you-can-provide-it
+          run: |
+            echo "multi-line"
+            echo "is supported"
+          # working-directory: not-required-but-you-can-provide-it
+      - name: Job fails
+        run: false
+      - uses: lisanna-dettwyler/action-post-run/success@3.1.0
+        with:
+          run: echo "this only runs if the job succeeded (post-if: 'success()'"
+name: Build
+on:
+  push:
+    branches: [ master ]
+jobs:
+  something:
+    name: Do something...
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: actions-post-run example
+        uses: lisanna-dettwyler/action-post-run@3.1.0
+        with:
+          run: echo "this thing works!"
+      - name: actions-post-run multiline example
+        uses: lisanna-dettwyler/action-post-run@3.1.0
+        with:
+          run: |
+            echo "multi-line"
+            echo "is supported"
+          # working-directory: not-required-but-you-can-provide-it
+      - name: Job fails
+        run: false
+      - name: actions-post-run/success example
+        uses: lisanna-dettwyler/action-post-run/success@3.1.0
+        with:
+          run: |
+            echo "this only runs if the job succeeded (post-if: 'success()'"
 
-      - name: 'Running an non-existing command will fail...'
-        run: run something that does not exist;
 ```
 
 This above configuration will produce the following:
 
 ![image](./docs/action-results.png)
 
-ℹ️ Note the order of execution. The `run: echo "this thing works again!"` was executed before the `run: echo "this thing works!"` command.
+> **Note** Note the order of execution. The multiline example was executed before the first example.
