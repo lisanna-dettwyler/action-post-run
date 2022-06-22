@@ -1,0 +1,24 @@
+name: Build
+on:
+  push:
+    branches: [ master ]
+jobs:
+  something:
+    name: Do something...
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: .
+        with:
+          run: echo "this thing works!"
+      - uses: .
+        with:
+          run: |
+            echo "multi-line"
+            echo "is supported"
+          # working-directory: not-required-but-you-can-provide-it
+      - name: Job fails
+        run: false
+      - uses: ./success
+        with:
+          run: echo "this only runs if the job succeeded (post-if: 'success()'"
