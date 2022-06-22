@@ -8,10 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: .
+      - uses: ./
         with:
           run: echo "this thing works!"
-      - uses: .
+      - uses: ./
         with:
           run: |
             echo "multi-line"
