@@ -8,10 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: ./
+      - name: actions-post-run example
+        uses: ./
         with:
           run: echo "this thing works!"
-      - uses: ./
+      - name: actions-post-run multiline example
+        uses: ./
         with:
           run: |
             echo "multi-line"
@@ -19,7 +21,8 @@ jobs:
           # working-directory: not-required-but-you-can-provide-it
       - name: Job fails
         run: false
-      - uses: ./success
+      - name: actions-post-run/success example
+        uses: ./success
         with:
           run: |
             echo "this only runs if the job succeeded (post-if: 'success()'"
