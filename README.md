@@ -9,7 +9,7 @@ A simple GitHub action that enables running post-run steps, once a workflow job 
 **Required** A command that needs to be run. Default `echo "This is a post-run step..."`.
 
 ## Example usage
-Latest version: `3.1.0`
+Latest version: `3.2.0`
 
 ```yaml
 name: Build
@@ -22,10 +22,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: lisanna-dettwyler/action-post-run@3.1.0
+      - uses: lisanna-dettwyler/action-post-run@3.2.0
         with:
           run: echo "this thing works!"
-      - uses: lisanna-dettwyler/action-post-run@3.1.0
+      - uses: lisanna-dettwyler/action-post-run@3.2.0
         with:
           run: |
             echo "multi-line"
@@ -33,7 +33,7 @@ jobs:
           # working-directory: not-required-but-you-can-provide-it
       - name: Job fails
         run: false
-      - uses: lisanna-dettwyler/action-post-run/success@3.1.0
+      - uses: lisanna-dettwyler/action-post-run/success@3.2.0
         with:
           run: echo "this only runs if the job succeeded (post-if: 'success()'"
 name: Build
@@ -47,11 +47,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: actions-post-run example
-        uses: lisanna-dettwyler/action-post-run@3.1.0
+        uses: lisanna-dettwyler/action-post-run@3.2.0
         with:
           run: echo "this thing works!"
       - name: actions-post-run multiline example
-        uses: lisanna-dettwyler/action-post-run@3.1.0
+        uses: lisanna-dettwyler/action-post-run@3.2.0
         with:
           run: |
             echo "multi-line"
@@ -60,7 +60,7 @@ jobs:
       - name: Job fails
         run: false
       - name: actions-post-run/success example
-        uses: lisanna-dettwyler/action-post-run/success@3.1.0
+        uses: lisanna-dettwyler/action-post-run/success@3.2.0
         with:
           run: |
             echo "this only runs if the job succeeded (post-if: 'success()'"
